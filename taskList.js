@@ -22,7 +22,6 @@ class TaskList extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Tasklist:</Text>
                 <ListView style={styles.listview} key={this.props.todos} dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}/>
             </View>
         );
@@ -35,10 +34,14 @@ TaskList.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 40
+        paddingTop: 40,
+        backgroundColor:'#F7F7F7',
+        flex:1,
+        justifyContent:'flex-start'
     },
     listview: {
-        paddingLeft: 10
+        paddingLeft: 10,
+        paddingRight: 10
     }
 });
 

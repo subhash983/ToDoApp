@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native'
+import {Text, StyleSheet, View} from 'react-native'
 
 class TaskRow extends React.Component {
     constructor(props, context) {
@@ -8,7 +8,9 @@ class TaskRow extends React.Component {
 
     render() {
         return (
-            <Text>{this.props.todo.task}..</Text>
+            <View style={styles.container}>
+                <Text style={styles.label}>{this.props.todo.task}..</Text>
+            </View>
         );
     }
 }
@@ -16,5 +18,24 @@ class TaskRow extends React.Component {
 TaskRow.propTypes = {
     todo: React.PropTypes.shape({task: React.PropTypes.string.isRequired}).isRequired
 };
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#E7E7E7',
+        padding: 20,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    label: {
+        fontSize: 20,
+        fontWeight: '300'
+    }
+})
 
 export default TaskRow;
