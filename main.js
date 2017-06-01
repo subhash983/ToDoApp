@@ -10,7 +10,7 @@ class HomeScreen extends React.Component {
         headerTitle: 'Welcome',
         headerStyle: {
             paddingLeft: 110,
-            paddingTop:20,
+            paddingTop: 20,
             justifyContent: 'center',
             backgroundColor: '#e00822'
         }
@@ -28,23 +28,20 @@ class HomeScreen extends React.Component {
         }
     }
 
+    componentWillMount() {
+        const {state} = this.props.navigation;
+        if (state.params && state.params.task) {
+            this.state.todos.push({task: state.params.task});
+            this.setState({todos: this.state.todos});
+        }
+    }
+
     onAddStarted() {
         this.props.navigation.navigate('TaskForm');
     }
 
-    renderScene(route, nav) {
-        switch (route.name) {
-            case 'taskform':
-                return (
-                    <Text>Add form comes from Here!</Text>
-                );
-                break;
-            default:
-
-        }
-    }
-
     render() {
+
         return (<TaskList todos={this.state.todos} onAddStarted={this.onAddStarted.bind(this)}/>);
     }
 }
@@ -56,7 +53,7 @@ const ToDoApp = StackNavigator({
     TaskForm: {
         screen: TaskFormScreen
     }
-});
+}, {initialRouteName: 'Home'});
 
 const styles = StyleSheet.create({
     header: {
