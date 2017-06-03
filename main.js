@@ -40,9 +40,15 @@ class HomeScreen extends React.Component {
         this.props.navigation.navigate('TaskForm');
     }
 
+    onDone(todo) {
+        var indx = this.state.todos.indexOf(todo);
+        this.state.todos.splice(indx, 1);
+        this.setState({todos: this.state.todos});
+    }
+
     render() {
 
-        return (<TaskList todos={this.state.todos} onAddStarted={this.onAddStarted.bind(this)}/>);
+        return (<TaskList todos={this.state.todos} onAddStarted={this.onAddStarted.bind(this)} onDone={this.onDone.bind(this)}/>);
     }
 }
 

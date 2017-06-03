@@ -1,22 +1,30 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native'
+import {Text, StyleSheet, View, TouchableHighlight} from 'react-native'
 
 class TaskRow extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
 
+    onDonePressed() {
+        this.props.onDone(this.props.todo);
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.label}>{this.props.todo.task}..</Text>
+                <TouchableHighlight style={styles.doneButton} onPress={this.onDonePressed.bind(this)}>
+                    <Text>Done</Text>
+                </TouchableHighlight>
             </View>
         );
     }
 }
 
 TaskRow.propTypes = {
-    todo: React.PropTypes.shape({task: React.PropTypes.string.isRequired}).isRequired
+    todo: React.PropTypes.shape({task: React.PropTypes.string.isRequired}).isRequired,
+    onDone: React.PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -35,6 +43,11 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 20,
         fontWeight: '300'
+    },
+    doneButton: {
+        borderRadius: 5,
+        backgroundColor: '#EAEAEA',
+        padding: 5
     }
 })
 

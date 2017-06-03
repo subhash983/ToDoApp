@@ -15,8 +15,17 @@ class TaskList extends React.Component {
         };
     }
 
+    componentWillReceiveProps(newProps) {
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+        });
+        this.setState({
+            dataSource: ds.cloneWithRows(newProps.todos)
+        });
+    }
+
     renderRow(todo) {
-        return (<TaskRow todo={todo}/>);
+        return (<TaskRow todo={todo} onDone={this.props.onDone}/>);
     }
 
     render() {
@@ -33,7 +42,8 @@ class TaskList extends React.Component {
 
 TaskList.propTypes = {
     todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    onAddStarted:React.PropTypes.func.isRequired
+    onAddStarted: React.PropTypes.func.isRequired,
+    onDone: React.PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
